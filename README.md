@@ -2,7 +2,9 @@
 
 **An AI feasibility and evaluation programme for consumer complaint triage. It concluded that the system should not be built, and measured exactly why.**
 
-[Live console](https://abeyance.vercel.app) · [Findings](docs/10_findings.md) · [Governance](docs/21_governance.md)
+[Live console](https://abeyance.vercel.app) · [Findings](docs/10_findings.md) · [Governance](docs/21_governance.md) · [Evidence](https://abeyance.vercel.app/evidence)
+
+![Risk coverage against the break even line](docs/17_risk_coverage.png)
 
 ---
 
@@ -75,27 +77,34 @@ Start with **[`docs/10_findings.md`](docs/10_findings.md)**. It is the study end
 
 | | Document | What it establishes |
 |---|---|---|
-| 01 | Corpus profile | 16,872,860 complaints, 3,830,206 with narratives |
-| 02 | Taxonomy drift | Three rename chains traced; window locked at 2023-08-25 |
-| 03 | Scoping decision | 2,312,146 narratives, 13 products, 89 issues |
-| 04 | Label noise | 46% agreement; the three category cycle |
-| 05 | Boundary cases | Fourteen lexical signals tested; none separates |
-| 06 | Annotation guideline | The counterfactual test; the abstention criterion |
-| 07 | Keyword baseline | Pre registered failure, confirmed |
-| 08 | LLM classifier | Intervention 1; abstention does not work |
-| 09 | Pairwise tournament | Intervention 2; zero cycles |
-| **10** | **Findings** | **The study** |
-| 11 | Variance | Three runs; one result does not survive |
-| 12 | BRD | Ten requirements traced to findings |
-| 13 | RTM and UAT | Traceability matrix and test cases (xlsx) |
-| 14 | Reliability | Intra rater agreement, stratified by contamination |
-| 15 | Opportunity assessment | Twelve interventions scored on seven dimensions |
-| 16 | Recommendation memo | Two pages, executive register |
-| 17 | Cost model | Break even precision and the shadow price of a misroute |
-| 18 | Draft generation | Intervention 3; four groundedness controls |
-| 19 | Judge validation | The judge measured before it was used |
-| 20 | Red team | Nine attacks, six caught, one unmitigated |
-| 21 | Governance | Model card, failure taxonomy, monitoring, rollback |
+| 04 | [Label noise](docs/04_label_noise.md) | 46% agreement; the three category cycle |
+| 05 | [Boundary cases](docs/05_boundary_cases.md) | Fourteen lexical signals tested; none separates |
+| 06 | [Annotation guideline](docs/06_annotation_guideline.md) | The counterfactual test; the abstention criterion |
+| 07 | [Keyword baseline](docs/07_baseline.md) | Pre registered failure, confirmed |
+| 08 | [LLM classifier](docs/08_llm.md) | Intervention 1; abstention does not work |
+| 09 | [Pairwise tournament](docs/09_tournament.md) | Intervention 2; zero cycles |
+| **10** | **[Findings](docs/10_findings.md)** | **The study** |
+| 11 | [Variance](docs/11_variance.md) | Three runs; one result does not survive |
+| 12 | [BRD](docs/12_brd.md) | Ten requirements traced to findings |
+| 13 | [RTM and UAT](docs/13_rtm_uat.xlsx) | Traceability matrix and test cases |
+| 14 | [Reliability](docs/14_reliability.md) | Intra rater agreement, stratified by contamination |
+| 15 | [Opportunity assessment](docs/15_opportunity_assessment.md) | Twelve interventions scored on seven dimensions |
+| 16 | [Recommendation memo](docs/16_recommendation_memo.md) | Two pages, executive register |
+| 17 | [Cost model](docs/17_cost_model.md) | Break even precision and the shadow price of a misroute |
+| 18 | [Draft generation](docs/18_draft_generation.md) | Intervention 3; four groundedness controls |
+| 19 | [Judge validation](docs/19_judge_validation.md) | The judge measured before it was used |
+| 20 | [Red team](docs/20_redteam.md) | Nine attacks, six caught, one unmitigated |
+| 21 | [Governance](docs/21_governance.md) | Model card, failure taxonomy, monitoring, rollback |
+
+**Phase 1 is reproducible rather than written up.** The corpus census, the taxonomy
+drift analysis and the scoping decision are produced by
+[`src/profile_corpus.py`](src/profile_corpus.py),
+[`src/taxonomy_drift.py`](src/taxonomy_drift.py) and
+[`src/scoping_decision.py`](src/scoping_decision.py), with the resulting category
+list in [`docs/taxonomy_reference.md`](docs/taxonomy_reference.md). Their findings
+are stated in §1 of the findings document: 16,872,860 complaints, 3,830,206
+carrying a narrative, three rename chains traced, and the window locked at
+25 August 2023.
 
 ---
 
