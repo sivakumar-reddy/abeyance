@@ -1,0 +1,21 @@
+# data
+data/
+*.parquet
+*.csv.zip
+complaints.csv
+
+# caches and outputs that are reproducible
+cache/
+venv/
+__pycache__/
+*.pyc
+
+# console
+console/node_modules/
+console/.next/
+console/.env
+console/.env.local
+
+# never commit
+.env
+*.key

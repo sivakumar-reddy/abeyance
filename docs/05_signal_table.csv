@@ -1,0 +1,15 @@
+,chose_ACCURACY,chose_INVESTIGATION,chose_PERMISSIBLE-PURPOSE,spread,official_ACCURACY,official_INVESTIGATION,official_PERMISSIBLE-PURPOSE
+dispute_sent,0.47,0.6,0.27,0.33,0.44,0.45,0.45
+inquiry,0.12,0.2,0.45,0.33,0.31,0.09,0.27
+fcra_cite,0.59,0.4,0.27,0.32,0.31,0.64,0.45
+identity_theft,0.06,0.3,0.36,0.3,0.38,0.09,0.09
+inaccurate,0.65,0.4,0.36,0.29,0.38,0.64,0.55
+reinvestigation,0.47,0.3,0.18,0.29,0.25,0.36,0.45
+permission,0.18,0.1,0.36,0.26,0.31,0.0,0.27
+removal_request,0.29,0.5,0.36,0.21,0.56,0.36,0.09
+verification,0.47,0.3,0.36,0.17,0.38,0.55,0.27
+repeated_attempts,0.06,0.2,0.18,0.14,0.19,0.18,0.0
+not_mine,0.12,0.1,0.0,0.12,0.0,0.09,0.18
+no_response,0.0,0.1,0.09,0.1,0.06,0.09,0.0
+thirty_days,0.12,0.1,0.09,0.03,0.12,0.18,0.0
+unresolved,0.0,0.0,0.0,0.0,0.0,0.0,0.0

@@ -1,0 +1,21 @@
+case_no,human_restatement,human_timeline,judge_restatement,judge_timeline,judge_reason,regex_restatement,regex_timeline
+1,True,False,True,False,The letter specifically references unrecognized/unauthorized inquiries on the consumer's credit report and their request to review submitted documentation.,True,False
+2,True,False,True,False,It references the consumer's disputes sent to credit reporting agencies about inaccurate or misleading information and lack of response to prior correspondence.,False,False
+3,True,True,True,True,"The letter specifies that the consumer's credit report contains personal information not belonging to them, affecting creditworthiness concerns.",True,True
+4,True,False,True,False,"The letter specifically mentions identity theft affecting accounts, inquiries, and balances on the TransUnion file, with a request to block the information.",False,False
+5,True,True,True,True,The letter specifically mentions data breach-related unauthorized accounts on the credit profile and the request to remove and block them.,True,True
+6,True,False,True,False,"The letter specifies two accounts on the consumer's Equifax file that they claim do not belong to them, referencing prior unresolved dispute attempts.",True,False
+7,True,True,True,True,"The letter specifies the disputed personal identifying information (name, address, SSN, DOB, phone, employer, associated-party info) claimed inaccurate.",False,True
+8,True,True,True,False,It specifically references disputed inaccurate/unverifiable items on the consumer's TransUnion credit report and prior disputes sent directly to the agency.,False,True
+9,True,True,True,True,"The letter specifies disputed accounts, collections, and hard inquiries on the Equifax report claimed to be due to identity theft, supported by an FTC report.",True,True
+10,True,False,True,False,"The letter specifically references the consumer's claim of a fraudulent, unauthorized account and prior dispute that was not properly investigated.",True,False
+11,True,True,True,True,The letter specifies unauthorized inquiries and charged-off accounts believed to be inaccurate.,True,True
+12,True,False,True,False,"The letter specifies that the consumer's report was furnished without written consent, violating permissible purpose requirements.",True,False
+13,True,False,True,False,The letter specifically references payments under a trial period/forbearance plan being reported late despite prior disputes.,True,False
+14,True,True,True,True,The letter specifically names the late payment and charge-off entries the consumer disputes as inaccurate and unverified.,False,True
+17,True,True,True,True,The letter specifies the complaint involves accounts the consumer states they did not open or authorize and believes are inaccurate.,False,True
+18,True,False,True,False,"The letter specifically mentions the FTC Identity Theft Report, fraudulent accounts not blocked/deleted, and reappearing items on the credit file.",False,False
+20,True,False,True,False,"The letter specifies the dismissed matter with incorrect filing date, inaccurate account numbers, and prior unanswered verification request.",False,False
+21,True,False,True,False,"The letter specifies disputed accounts from identity theft, submitted affidavit and proof of identity, and verification without adequate explanation.",True,False
+22,True,True,True,True,The letter specifies the disputed items: an account reported as closed and an unrecognized inquiry.,True,True
+23,True,True,True,True,The letter specifies the dispute over late payment entries on three named loan accounts during a mortgage assistance review period.,True,True

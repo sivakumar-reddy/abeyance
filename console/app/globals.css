@@ -1,0 +1,489 @@
+/* ===========================================================================
+   ABEYANCE — decision console
+   ---------------------------------------------------------------------------
+   The interface is achromatic. There is no accent colour and no warning colour,
+   because a system whose output is "I decline" should not need one.
+
+   When a determination is withheld, the block INVERTS: paper white, black text.
+   That is the only chromatic event in the product, and it is not a colour, it
+   is a change of state. The case has left the machine and gone to a person.
+   =========================================================================== */
+
+:root {
+  /* cold neutral ramp, blue leaning, no warmth anywhere */
+  --k-0:  #07090c;
+  --k-1:  #0c0f14;
+  --k-2:  #11151b;
+  --k-3:  #161b23;
+  --k-4:  #1d232c;
+
+  --r-1:  #232a34;
+  --r-2:  #2e3743;
+  --r-3:  #3c4653;
+
+  --w-1:  #e9ecf1;
+  --w-2:  #aeb6c2;
+  --w-3:  #7c8593;
+  --w-4:  #565f6c;
+
+  --paper:      #f2f4f7;
+  --paper-ink:  #07090c;
+  --paper-dim:  #414852;
+
+  /* The only chroma in the product. Seal red, the colour of a correction on a
+     filing. It marks one thing: a theory that survives, which is what leads to
+     withholding. It appears on roughly one percent of pixels. */
+  --seal:      #e5484d;
+  --seal-dim:  rgba(229, 72, 77, .16);
+  --seal-line: rgba(229, 72, 77, .42);
+
+  --sans: "Archivo", system-ui, -apple-system, sans-serif;
+  --disp: "Archivo Expanded", "Archivo", var(--sans);
+  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --rad: 3px;
+  --hair: 1px solid var(--r-1);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #000;
+  color: var(--w-1);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: var(--paper); color: var(--paper-ink); }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 1px solid var(--w-1); outline-offset: 3px; border-radius: 1px; }
+
+/* --------------------------------------------------------------- topbar */
+.topbar {
+  position: sticky; top: 0; z-index: 40;
+  background: #000;
+  border-bottom: var(--hair);
+}
+.topbar .in {
+  max-width: 1320px; margin: 0 auto; padding: 0 22px;
+  height: 50px; display: flex; align-items: center; gap: 16px;
+}
+.mark {
+  font-family: var(--disp); font-size: 12.5px; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+.mark span {
+  font-family: var(--mono); font-weight: 400; text-transform: none;
+  letter-spacing: 0; color: var(--w-4); font-size: 11.5px;
+}
+.grow { flex: 1; }
+
+.navlink {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--w-4); text-decoration: none;
+  padding: 4px 0; border-bottom: 1px solid transparent;
+  transition: color .13s, border-color .13s;
+}
+.navlink + .navlink { margin-left: 4px; }
+.navlink:hover { color: var(--w-2); }
+.navlink[aria-current="page"] { color: var(--w-1); border-bottom-color: var(--w-1); }
+
+.chip {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; padding: 4px 9px;
+  border: 1px solid var(--r-2); color: var(--w-3); white-space: nowrap;
+}
+.chip.build { color: var(--w-1); border-color: var(--r-3); }
+.chip.seal { color: var(--seal); border-color: var(--seal-line); }
+
+.ticker {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em;
+  color: var(--w-4); font-variant-numeric: tabular-nums;
+}
+.ticker b { color: var(--w-2); font-weight: 500; }
+
+/* --------------------------------------------------------------- console */
+.console {
+  max-width: 1320px; margin: 0 auto; padding: 0 22px 18px;
+  display: flex; flex-direction: column; height: calc(100vh - 50px);
+}
+
+.context { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; padding: 15px 0 16px; }
+.context .line { font-size: 13px; color: var(--w-3); max-width: 48ch; line-height: 1.45; }
+.context .line strong { color: var(--w-1); font-weight: 600; }
+.context .figs { display: flex; gap: 26px; margin-left: auto; }
+
+.fig { display: flex; align-items: baseline; gap: 8px; }
+.fig b {
+  font-family: var(--disp); font-size: 15px; font-weight: 600;
+  letter-spacing: .01em; font-variant-numeric: tabular-nums; color: var(--w-1);
+}
+.fig span { font-family: var(--mono); font-size: 10.5px; color: var(--w-4); white-space: nowrap; }
+
+.panes { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0,.72fr) minmax(0,1.28fr); gap: 1px; background: var(--r-1); border: var(--hair); }
+@media (max-width: 1000px) { .panes { grid-template-columns: 1fr; } .console { height: auto; } .context .figs { margin-left: 0; } }
+
+.card { background: var(--k-1); overflow: hidden; display: flex; flex-direction: column; min-height: 0; }
+
+.head {
+  display: flex; align-items: center; gap: 10px; height: 38px; padding: 0 16px;
+  border-bottom: var(--hair); flex: none;
+}
+.head h2 {
+  margin: 0; font-family: var(--mono); font-size: 10.5px; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--w-3);
+}
+.head .aux { margin-left: auto; font-family: var(--mono); font-size: 10.5px; color: var(--w-4); font-variant-numeric: tabular-nums; }
+
+.scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.scroll::-webkit-scrollbar { width: 9px; }
+.scroll::-webkit-scrollbar-track { background: transparent; }
+.scroll::-webkit-scrollbar-thumb { background: var(--r-1); border: 3px solid var(--k-1); }
+.scroll::-webkit-scrollbar-thumb:hover { background: var(--r-2); }
+
+/* --------------------------------------------------------------- intake */
+.pad { padding: 16px; }
+
+textarea {
+  display: block; width: 100%; min-height: 148px; resize: vertical;
+  padding: 13px 14px; font-family: var(--sans); font-size: 14.5px; line-height: 1.6;
+  color: var(--w-1); background: var(--k-0);
+  border: 1px solid var(--r-1); border-radius: var(--rad);
+  transition: border-color .15s;
+}
+textarea::placeholder { color: var(--w-4); }
+textarea:hover { border-color: var(--r-2); }
+textarea:focus { outline: none; border-color: var(--w-4); }
+
+.libtitle {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--w-4); margin: 20px 0 8px;
+}
+
+.case {
+  display: grid; grid-template-columns: 28px minmax(0,1fr) auto; gap: 10px;
+  align-items: center; width: 100%; text-align: left;
+  padding: 9px 8px; background: transparent;
+  border: 0; border-bottom: 1px solid var(--k-3);
+  cursor: pointer; transition: background .12s, padding-left .12s;
+}
+.case:hover { background: var(--k-2); padding-left: 12px; }
+.case[aria-pressed="true"] { background: var(--k-3); }
+.case .num { font-family: var(--mono); font-size: 10px; color: var(--w-4); font-variant-numeric: tabular-nums; }
+.case .nm { font-size: 13px; color: var(--w-2); line-height: 1.35; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* unresolvable cases are marked by a filled square, resolvable by an outline.
+   weight, not colour. */
+.dot { width: 7px; height: 7px; flex: none; border: 1px solid var(--r-3); }
+.dot.hold { background: var(--seal); border-color: var(--seal); }
+
+.bar { display: flex; align-items: center; gap: 12px; flex: none; padding: 12px 16px; border-top: var(--hair); }
+
+button.primary {
+  font-family: var(--mono); font-size: 11.5px; font-weight: 500;
+  letter-spacing: .11em; text-transform: uppercase;
+  padding: 10px 20px; border-radius: var(--rad);
+  color: var(--paper-ink); background: var(--paper); border: 1px solid var(--paper);
+  cursor: pointer; transition: opacity .14s;
+}
+button.primary:hover:not(:disabled) { opacity: .88; }
+button.primary:disabled { opacity: .2; cursor: not-allowed; }
+.kbd { font-family: var(--mono); font-size: 10px; color: var(--w-4); border: 1px solid var(--r-2); padding: 3px 6px; }
+.hint { font-family: var(--mono); font-size: 10.5px; color: var(--w-4); }
+
+/* --------------------------------------------------------------- pitch */
+.pitch { padding: 46px 34px 34px; }
+.kicker { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--w-4); margin: 0 0 18px; }
+.pitch h1 {
+  font-family: var(--disp); font-size: clamp(30px, 4.2vw, 50px); font-weight: 600;
+  line-height: 1.02; letter-spacing: -.018em; margin: 0 0 20px; max-width: 13ch; color: var(--w-1);
+}
+.pitch h1 em { font-style: normal; color: var(--seal); }
+.pitch .lede { margin: 0; max-width: 48ch; font-size: 14.5px; line-height: 1.64; color: var(--w-3); }
+.pitch .lede strong { color: var(--w-1); font-weight: 600; }
+.pitch .fn {
+  margin: 28px 0 0; padding-top: 18px; border-top: var(--hair);
+  font-family: var(--mono); font-size: 11.5px; color: var(--w-4); max-width: 48ch; line-height: 1.7;
+}
+.pitch .fn b { color: var(--w-1); font-weight: 500; }
+
+/* ---------------------------------------------------- pleading paper
+   Court filings are printed on numbered paper: line numbers down the left
+   margin against a vertical rule. The reasoning pane is printed on it.      */
+.filing { position: relative; padding-left: 54px; }
+
+.filing::before {
+  content: "";
+  position: absolute; top: 0; bottom: 0; left: 53px;
+  width: 1px; background: var(--r-1);
+}
+
+/* the filing is its own band; nothing below it inherits the margin */
+.filing { overflow: hidden; }
+
+/* The numbers are generated by the rule itself, so they can never run past the
+   end of the filing the way a fixed list of them did. */
+.gutter {
+  position: absolute; top: 0; left: 0; width: 53px; bottom: 0;
+  overflow: hidden;
+  padding: 14px 12px 0 0;
+  user-select: none; pointer-events: none;
+}
+
+.gutter span {
+  display: block; height: 26px; line-height: 26px;
+  font-family: var(--mono); font-size: 9.5px;
+  color: var(--r-3); text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ================================================================= LEDGER */
+.thy {
+  position: relative;
+  display: grid; grid-template-columns: minmax(0,1fr) 112px; gap: 16px;
+  align-items: start; padding: 18px 16px 18px 22px;
+  opacity: 0; animation: fade .5s cubic-bezier(.2,.8,.3,1) forwards;
+}
+
+/* the chain: a hairline runs through every theory, with a node at each */
+.thy::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 1px; background: var(--r-1);
+}
+.thy:first-child::before { top: 26px; }
+.thy:last-child::before  { bottom: auto; height: 26px; }
+
+.thy::after {
+  content: ""; position: absolute; left: -3px; top: 22px;
+  width: 7px; height: 7px; border: 1px solid var(--r-3);
+  background: var(--k-1);
+}
+.thy.live::after { background: var(--seal); border-color: var(--seal); }
+.thy:nth-child(1) { animation-delay: .05s; }
+.thy:nth-child(2) { animation-delay: .2s; }
+.thy:nth-child(3) { animation-delay: .35s; }
+@keyframes fade { to { opacity: 1; } }
+
+.thy .nm {
+  font-family: var(--disp); font-size: 12.5px; font-weight: 600;
+  letter-spacing: .05em; text-transform: uppercase;
+  color: var(--w-4); margin: 0 0 6px; transition: color .3s;
+}
+.thy.live .nm { color: var(--w-1); }
+.thy .test { font-size: 13px; line-height: 1.55; color: var(--w-4); margin: 0; }
+.thy.live .test { color: var(--w-2); }
+
+.res {
+  justify-self: end; font-family: var(--mono); font-size: 9.5px;
+  letter-spacing: .12em; text-transform: uppercase; padding: 4px 9px;
+  white-space: nowrap; border: 1px solid var(--r-1); color: var(--w-4);
+}
+.res.survives { border-color: var(--seal-line); color: var(--seal); background: var(--seal-dim); }
+
+/* --------------------------------------------------------------- verdict */
+.verdict { padding: 26px 16px; border-top: var(--hair); border-bottom: var(--hair); }
+.vlabel {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--w-4); margin: 0 0 12px;
+}
+.vmain {
+  font-family: var(--disp); font-size: clamp(18px, 2.2vw, 25px); font-weight: 600;
+  letter-spacing: -.004em; line-height: 1.22; margin: 0; color: var(--w-1);
+}
+.vsub { margin: 11px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--w-3); max-width: 58ch; }
+
+/* THE INVERSION.
+   The only chromatic event in the interface. The case leaves the machine. */
+.verdict.held {
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-shadow: inset 3px 0 0 var(--seal);
+  animation: surface .34s cubic-bezier(.2,.8,.3,1) both;
+}
+.verdict.held .vlabel { color: var(--paper-dim); }
+.verdict.held .vmain { color: var(--paper-ink); }
+.verdict.held .vsub { color: var(--paper-dim); }
+
+@keyframes surface {
+  from { background: var(--k-1); color: var(--w-1); }
+}
+
+.conf { display: flex; align-items: center; gap: 12px; margin-top: 18px; }
+.conf .seg { display: flex; gap: 3px; }
+.conf .seg i { width: 14px; height: 3px; background: var(--r-1); transition: background .3s; }
+.conf .seg i.on { background: var(--w-2); }
+.verdict.held .conf .seg i { background: rgba(7,9,12,.14); }
+.verdict.held .conf .seg i.on { background: var(--paper-ink); }
+.conf .n { font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; color: var(--w-4); font-variant-numeric: tabular-nums; }
+.verdict.held .conf .n { color: var(--paper-dim); }
+
+/* --------------------------------------------------------------- audit */
+.sec { display: flex; align-items: center; gap: 8px; padding: 16px 16px 10px; }
+.sec h3 { margin: 0; font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--w-4); font-weight: 500; }
+.sec .cnt { margin-left: auto; font-family: var(--mono); font-size: 10.5px; color: var(--w-3); font-variant-numeric: tabular-nums; }
+
+.chk { display: grid; grid-template-columns: 16px minmax(0,1fr); gap: 12px; align-items: start; padding: 10px 16px; border-top: 1px solid var(--k-3); }
+.chk.fail { background: var(--k-2); }
+.chk .g { padding-top: 2px; }
+.chk .t { font-size: 13px; color: var(--w-2); }
+.chk.fail .t { color: var(--w-1); font-weight: 600; }
+.chk .d { display: block; margin-top: 3px; font-family: var(--mono); font-size: 10.5px; color: var(--w-4); word-break: break-word; }
+
+.prov { padding: 11px 16px; border-top: 1px solid var(--k-3); font-family: var(--mono); font-size: 10.5px; color: var(--w-4); line-height: 1.7; margin: 0; }
+
+/* --------------------------------------------------------------- letter */
+.lw { padding: 16px; border-top: var(--hair); }
+.lh { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.lh span { font-family: var(--mono); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--w-4); }
+button.ghost {
+  margin-left: auto; font-family: var(--mono); font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; padding: 4px 9px;
+  border: 1px solid var(--r-2); background: transparent; color: var(--w-3);
+  cursor: pointer; transition: border-color .13s, color .13s;
+}
+button.ghost:hover { border-color: var(--w-3); color: var(--w-1); }
+
+.letter {
+  margin: 0; padding: 20px 22px; white-space: pre-wrap;
+  background: var(--k-0); border: 1px solid var(--r-1);
+  font-family: var(--sans); font-size: 14px; line-height: 1.72; color: var(--w-2);
+}
+.note { padding: 16px; font-size: 13px; line-height: 1.62; color: var(--w-4); }
+
+/* --------------------------------------------------------------- states */
+.state { padding: 80px 32px; text-align: center; }
+.state .h { font-family: var(--disp); font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--w-3); margin: 0 0 10px; }
+.state .p { margin: 0 auto; max-width: 42ch; font-size: 13.5px; color: var(--w-4); line-height: 1.62; }
+
+.think { display: flex; flex-direction: column; gap: 14px; padding: 36px 16px; }
+.think .row { display: grid; grid-template-columns: 24px 1fr; gap: 16px; align-items: center; }
+.think .ix { font-family: var(--mono); font-size: 10px; color: var(--w-4); }
+.think .sk {
+  height: 8px;
+  background: linear-gradient(90deg, var(--k-3) 25%, var(--r-1) 37%, var(--k-3) 63%);
+  background-size: 400% 100%; animation: shim 1.6s ease-in-out infinite;
+}
+.think .row:nth-child(2) .sk { animation-delay: .14s; width: 80%; }
+.think .row:nth-child(3) .sk { animation-delay: .28s; width: 62%; }
+@keyframes shim { 0%{background-position:100% 0} 100%{background-position:0 0} }
+.thinklabel { padding: 0 16px 28px; text-align: center; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--w-4); }
+
+/* ================================================================ EVIDENCE
+   Same materials as the console: pleading rule, seal at one percent, and the
+   two concluding sections printed on paper.
+   ======================================================================== */
+.page { max-width: 1200px; margin: 0 auto; padding: 0 0 110px; }
+
+.phead { padding: 60px 22px 34px; max-width: 1200px; margin: 0 auto; }
+.phead .over {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--w-4); margin: 0 0 22px;
+}
+.phead h1 {
+  font-family: var(--disp); font-size: clamp(30px, 5vw, 62px); font-weight: 600;
+  letter-spacing: -.022em; line-height: 1.02; margin: 0 0 22px; max-width: 17ch;
+}
+.phead h1 em { font-style: normal; color: var(--seal); }
+.phead p { margin: 0; max-width: 62ch; font-size: 16px; line-height: 1.6; color: var(--w-3); }
+.phead p strong { color: var(--w-1); font-weight: 600; }
+
+/* headline figures, large */
+.headline {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px; background: var(--r-1);
+  border-top: var(--hair); border-bottom: var(--hair); margin: 46px 0 0;
+}
+.hcell { background: var(--k-1); padding: 30px 22px 26px; }
+.hcell b {
+  display: block; font-family: var(--disp); font-size: 52px; font-weight: 600;
+  letter-spacing: -.03em; line-height: .92; font-variant-numeric: tabular-nums; color: var(--w-1);
+}
+.hcell b.lead { color: var(--seal); }
+.hcell span { display: block; margin-top: 16px; font-size: 12.5px; line-height: 1.5; color: var(--w-4); max-width: 26ch; }
+
+/* a section is a filing: display numeral in the rail, rule down the side */
+.block {
+  position: relative;
+  display: grid; grid-template-columns: 108px minmax(0, 1fr);
+  gap: 0; padding: 54px 22px 54px 0; margin: 0 auto; max-width: 1200px;
+  border-bottom: 1px solid var(--k-3);
+}
+@media (max-width: 760px) { .block { grid-template-columns: 54px minmax(0,1fr); } }
+
+.rail { position: relative; padding-left: 22px; }
+.rail .n {
+  font-family: var(--disp); font-size: 40px; font-weight: 600;
+  letter-spacing: -.02em; color: var(--r-3); line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.rail::after {
+  content: ""; position: absolute; top: 6px; bottom: -54px; right: 26px;
+  width: 1px; background: var(--r-1);
+}
+
+.block h2 {
+  font-family: var(--disp); font-size: clamp(20px, 2.4vw, 28px); font-weight: 600;
+  letter-spacing: -.012em; line-height: 1.14; margin: 0 0 16px; color: var(--w-1); max-width: 22ch;
+}
+.block > div > p { margin: 0 0 24px; max-width: 66ch; font-size: 14.5px; line-height: 1.66; color: var(--w-3); }
+.block > div > p strong { color: var(--w-1); font-weight: 600; }
+
+/* The two concluding sections are marked by the seal rail, not by inversion.
+   Inversion is reserved for the console, where a withheld case leaves the
+   machine. On a page it only interrupts the read. */
+.block.mark .rail::after { background: var(--seal-line); }
+.block.mark .rail .n { color: var(--seal); }
+.block.mark h2 { color: var(--w-1); }
+
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+thead th {
+  text-align: left; font-family: var(--mono); font-size: 9.5px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--w-4); font-weight: 500;
+  padding: 0 14px 11px 0; border-bottom: 1px solid var(--r-2);
+}
+thead th:not(:first-child) { padding-left: 14px; }
+tbody td { padding: 13px 14px 13px 0; border-bottom: 1px solid var(--k-3); color: var(--w-2); vertical-align: top; }
+tbody td:not(:first-child) { padding-left: 14px; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 12.5px; }
+td.key, .key { color: var(--w-1); font-weight: 500; }
+td.dim { color: var(--w-4); font-size: 12.5px; }
+.ok { color: var(--w-2); }
+.flag { color: var(--seal); font-weight: 600; }
+
+.plot { border: var(--hair); padding: 26px 22px 18px; }
+.legend { margin-top: 18px; font-family: var(--mono); font-size: 10.5px; color: var(--w-4); }
+
+.bars { display: flex; flex-direction: column; gap: 9px; }
+.brow { display: grid; grid-template-columns: 162px 1fr 48px; gap: 16px; align-items: center; }
+.brow .lb { font-family: var(--mono); font-size: 10.5px; color: var(--w-3); }
+.brow .tr { height: 5px; background: var(--k-3); }
+.brow .tr i { display: block; height: 100%; background: var(--r-3); }
+.brow.top .tr i { background: var(--seal); }
+.brow .vl { font-family: var(--mono); font-size: 10.5px; color: var(--w-4); text-align: right; font-variant-numeric: tabular-nums; }
+
+.callout { border-left: 2px solid var(--seal); padding: 2px 0 2px 22px; margin-top: 26px; }
+.callout p { margin: 0; font-size: 14.5px; line-height: 1.68; color: var(--w-2); max-width: 64ch; }
+.callout strong { color: var(--w-1); font-weight: 600; }
+
+.tri { display: block; margin: 4px 0 26px; }
+
+.foot {
+  max-width: 1200px; margin: 0 auto; padding: 46px 22px 0;
+  display: grid; grid-template-columns: 108px repeat(2, minmax(0,1fr)); gap: 0 34px;
+  font-size: 13px; line-height: 1.66; color: var(--w-4);
+}
+@media (max-width: 760px) { .foot { grid-template-columns: 1fr; } }
+.foot h4 { margin: 0 0 9px; font-family: var(--mono); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--w-4); font-weight: 500; }
+.foot p { margin: 0; }
+.foot strong { color: var(--w-2); font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  .thy { opacity: 1; }
+}

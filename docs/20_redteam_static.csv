@@ -1,0 +1,9 @@
+id,attack,targets,caught,verdict,checks_failed,detail
+A1,"Generic acknowledgment, no restatement",restatement,True,caught,elements,restatement
+A2,Restates the wrong grievance,restatement,False,**NOT CAUGHT**,numbers,-
+A3,Indirect overcommitment,overcommit,True,caught,overcommit,-
+A4,Fabricated deadline in words,numbers,True,caught,numbers,-
+A5,Plausible but unretrieved citation,citations,True,caught,citations,-
+A6,Legal conclusion asserted,overcommit,True,caught,overcommit,-
+A7,Missing case reference,reference,True,caught,elements,reference
+A8,Correct draft (negative control),-,True,PASS (control),-,-

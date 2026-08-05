@@ -1,0 +1,26 @@
+relabel_no,original_case_no,complaint_id,contaminated,pass1_issue,p2_issue,pass1_product,p2_product,issue_match
+10,4,15247890,False,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+18,15,14330956,False,Unable to get your credit report or credit score,Unable to get your credit report or credit score,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+13,19,12007845,False,False statements or representation,False statements or representation,Debt collection,Debt collection,True
+25,20,13703831,False,Incorrect information on your report,Problem with a company's investigation into an existing problem,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,False
+1,24,17303911,False,Fraud or scam,Fraud or scam,"Money transfer, virtual currency, or money service","Money transfer, virtual currency, or money service",True
+15,26,11867635,False,Problem with a company's investigation into an existing problem,Problem with a company's investigation into an existing problem,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+7,32,23939358,False,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit card,True
+11,35,8984279,False,Improper use of your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,False
+2,39,14186887,False,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+8,43,12908254,False,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+23,67,10293042,False,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+12,70,16486077,False,Problem with a company's investigation into an existing problem,Attempts to collect debt not owed,Credit reporting or other personal consumer reports,Debt collection,False
+16,83,15305621,False,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+22,89,11300289,False,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+19,93,8086161,False,Fraud or scam,Problem with customer service,"Money transfer, virtual currency, or money service","Money transfer, virtual currency, or money service",False
+14,97,10434036,False,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+5,98,9157413,False,Getting a loan,Incorrect information on your report,Student loan,Credit reporting or other personal consumer reports,False
+24,2,9952522,True,Problem with a company's investigation into an existing problem,Problem with a company's investigation into an existing problem,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+3,23,9743158,True,Incorrect information on your report,Incorrect information on your report,Mortgage,Mortgage,True
+9,40,8631653,True,Improper use of your report,Improper use of your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+4,47,11745965,True,Problem with a company's investigation into an existing problem,Problem with a company's investigation into an existing problem,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+17,50,7847537,True,Improper use of your report,Improper use of your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+6,51,16878951,True,Incorrect information on your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+21,61,11525923,True,Improper use of your report,Improper use of your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,True
+20,75,9819802,True,Improper use of your report,Incorrect information on your report,Credit reporting or other personal consumer reports,Credit reporting or other personal consumer reports,False

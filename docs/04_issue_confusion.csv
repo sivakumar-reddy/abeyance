@@ -1,0 +1,17 @@
+official_issue,Attempts to collect debt not owed,False statements or representation,Fraud or scam,Getting a loan,Improper use of your report,Incorrect information on your report,Other service problem,Problem caused by your funds being low,Problem with a company's investigation into an existing problem,Problem with a purchase shown on your statement,Problem with customer service,Trouble using your card,Unable to get your credit report or credit score,Written notification about debt
+"Advertising and marketing, including promotional offers",0,0,0,0,0,1,0,0,0,0,0,0,0,0
+Attempts to collect debt not owed,4,1,0,0,0,2,0,0,0,0,0,0,0,0
+False statements or representation,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+Fraud or scam,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+Getting a credit card,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+Improper use of your report,0,0,0,0,5,8,0,0,3,0,0,0,0,0
+Incorrect information on your report,1,0,0,0,9,28,0,0,7,0,0,0,0,1
+"Other features, terms, or problems",0,0,0,1,0,0,0,0,0,0,1,0,0,0
+Other transaction problem,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+Problem caused by your funds being low,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+Problem when making payments,0,0,0,0,0,1,0,0,0,0,0,0,0,0
+Problem with a company's investigation into an existing problem,0,0,0,0,2,9,0,0,5,0,0,0,0,0
+Problem with a purchase shown on your statement,0,0,0,0,0,1,0,0,0,1,0,1,0,0
+Took or threatened to take negative or legal action,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+Unable to get your credit report or credit score,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+Unauthorized transactions or other transaction problem,0,0,1,0,0,0,0,0,0,0,0,0,0,0
