@@ -1,0 +1,5 @@
+comparison,n_paired,a_only_correct,b_only_correct,mcnemar_p
+A_baseline -> B_fewshot,83,7,0,0.0156
+B_fewshot -> C_fewshot_prior,83,0,6,0.0312
+C_fewshot_prior -> D_selfconsistency,83,1,1,1.0
+A_baseline -> D_selfconsistency,83,4,3,1.0
