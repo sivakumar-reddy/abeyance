@@ -436,9 +436,9 @@ button.ghost:hover { border-color: var(--w-3); color: var(--w-1); }
 /* The two concluding sections are marked by the seal rail, not by inversion.
    Inversion is reserved for the console, where a withheld case leaves the
    machine. On a page it only interrupts the read. */
-.block.mark .rail::after { background: var(--seal-line); }
-.block.mark .rail .n { color: var(--seal); }
-.block.mark h2 { color: var(--w-1); }
+.block.flagged .rail::after { background: var(--seal-line); }
+.block.flagged .rail .n { color: var(--seal); }
+.block.flagged h2 { color: var(--w-1); }
 
 table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 thead th {
@@ -486,4 +486,112 @@ td.dim { color: var(--w-4); font-size: 12.5px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   .thy { opacity: 1; }
+}
+
+
+/* ===========================================================================
+   MOBILE
+   Below 760px the layout is a single column, the rail numeral sits above its
+   heading rather than beside it, and every wide element is allowed to scroll
+   rather than to overflow the viewport.
+   =========================================================================== */
+@media (max-width: 760px) {
+
+  /* ---- chrome ---- */
+  .topbar .in {
+    height: auto; min-height: 46px; padding: 8px 16px;
+    flex-wrap: wrap; gap: 8px 12px;
+  }
+  .mark { font-size: 12px; }
+  .mark span { display: none; }              /* the descriptor is not worth a line */
+  .grow { display: none; }
+  .navlink { font-size: 10.5px; padding: 3px 0; }
+  .ticker { margin-left: auto; font-size: 10px; }
+  .chip { font-size: 9px; padding: 3px 6px; letter-spacing: .09em; }
+
+  /* ---- console ---- */
+  .console { height: auto; padding: 0 16px 28px; }
+  .context { flex-direction: column; align-items: flex-start; gap: 14px; padding: 16px 0; }
+  .context .line { max-width: none; font-size: 13px; }
+  .context .figs {
+    margin-left: 0; width: 100%; gap: 10px;
+    flex-direction: column; align-items: flex-start;
+  }
+  .fig { gap: 8px; }
+  .fig b { font-size: 15px; }
+  .fig span { font-size: 11px; white-space: normal; }
+
+  .panes { grid-template-columns: 1fr; gap: 1px; }
+  .scroll { overflow-y: visible; }
+  textarea { min-height: 128px; font-size: 16px; }   /* 16px stops iOS zooming on focus */
+
+  .pitch { padding: 30px 18px 26px; }
+  .pitch h1 { font-size: 27px; max-width: none; }
+  .pitch .lede { font-size: 14px; max-width: none; }
+  .pitch .fn { font-size: 11.5px; max-width: none; }
+
+  /* ---- ledger ---- */
+  .filing { padding-left: 40px; }
+  .filing::before { left: 39px; }
+  .gutter { width: 39px; padding-right: 9px; }
+  .thy {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px; padding: 15px 16px 15px 18px;
+  }
+  .res { justify-self: start; }
+  .thy .test { font-size: 12.5px; }
+
+  .verdict { padding: 20px 16px; }
+  .vmain { font-size: 20px; }
+  .vsub { font-size: 13px; }
+  .conf { flex-wrap: wrap; gap: 8px; }
+  .conf .seg i { width: 11px; }
+
+  .chk { grid-template-columns: 15px minmax(0, 1fr); padding: 9px 16px; }
+  .letter { padding: 15px 16px; font-size: 13.5px; }
+
+  /* ---- evidence ---- */
+  .page { padding: 0 0 70px; }
+  .phead { padding: 34px 16px 24px; }
+  .phead h1 { font-size: 28px; max-width: none; }
+  .phead p { font-size: 14.5px; }
+
+  .headline { grid-template-columns: 1fr 1fr; }
+  .hcell { padding: 18px 14px; }
+  .hcell b { font-size: 32px; }
+  .hcell span { font-size: 11.5px; margin-top: 10px; max-width: none; }
+
+  /* the numeral moves above the heading; no more overlap */
+  .block {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 34px 16px;
+  }
+  .rail { padding-left: 0; margin-bottom: 14px; }
+  .rail::after { display: none; }
+  .rail .n { font-size: 22px; }
+  .block h2 { font-size: 21px; max-width: none; }
+  .block > div > p { font-size: 14px; max-width: none; }
+
+  /* wide tables scroll rather than squeeze */
+  .block > div { min-width: 0; }
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+  table thead th, table tbody td { white-space: normal; }
+  tbody td { font-size: 12.5px; padding: 10px 10px 10px 0; }
+  thead th { font-size: 9px; }
+
+  .plot { padding: 18px 14px 12px; overflow-x: auto; }
+  .brow { grid-template-columns: 108px 1fr 40px; gap: 10px; }
+  .brow .lb { font-size: 9.5px; }
+  .tri { min-width: 460px; }
+
+  .callout { padding-left: 16px; margin-top: 20px; }
+  .callout p { font-size: 13.5px; }
+
+  .foot { grid-template-columns: 1fr; gap: 22px; padding: 32px 16px 0; }
+  .foot > div[aria-hidden] { display: none; }
+}
+
+@media (max-width: 400px) {
+  .headline { grid-template-columns: 1fr; }
+  .navlink { font-size: 10px; }
 }

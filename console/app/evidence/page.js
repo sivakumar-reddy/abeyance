@@ -303,7 +303,7 @@ export default function Evidence() {
         </section>
 
         {/* 7 */}
-        <section className="block mark">
+        <section className="block flagged">
           <div className="rail"><span className="n">07</span></div>
           <div>
             <h2>The failure no control catches</h2>
@@ -339,7 +339,7 @@ export default function Evidence() {
         </section>
 
         {/* 8 */}
-        <section className="block mark">
+        <section className="block flagged">
           <div className="rail"><span className="n">08</span></div>
           <div>
             <h2>Three conditions before a build decision</h2>
